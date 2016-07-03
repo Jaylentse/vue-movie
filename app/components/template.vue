@@ -51,10 +51,12 @@
 <script>
     window.onscroll = function () {
         var mask = document.getElementsByClassName('mask')[0]
-        if(document.body.scrollTop>50){
-            mask.style.top = '0';
-        }else {
-            mask.style.top = '50px'
+        if(!!mask){
+            if(document.body.scrollTop>50){
+                mask.style.top = '0';
+            }else {
+                mask.style.top = '50px'
+            }
         }
     };
     export default {

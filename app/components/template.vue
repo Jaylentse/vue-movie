@@ -21,14 +21,14 @@
         <nav class="clearfix" v-show="!$loadingRouteData">
             <ul class="pagination pagination-lg">
                 <li :class="{'disabled': start == 0}">
-                    <a v-link="path +'?start='+(start-20)+'&count=20'" aria-label="Previous">
+                    <a v-link="prev" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li class="page-item" v-for="page in pages" :class="{'active': $index==(start/20)}">
                     <a class="page-link" href="#" v-link="path +'?start='+$index*20+'&count=20'">{{page}}</a></li>
                 <li :class="{'disabled': start + 20 > total}">
-                    <a v-link="path +'?start='+(start+20)+'&count=20'" aria-label="Next">
+                    <a v-link="next" aria-label="next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -89,6 +89,20 @@
             },
             path: function () {
                 return this.$route.path.replace(/\?.+/,'')
+            },
+            next: function () {
+                if(this.start + 20 > this.total) {
+                    return this.$route.path
+                } else {
+                    return this.$route.path.replace(/\?.+/,'')+'?start='+(this.start+20)+'&count=20'
+                }
+            },
+            prev: function () {
+                if(this.start == 0) {
+                    return this.$route.path
+                } else {
+                    return this.$route.path.replace(/\?.+/,'')+'?start='+(this.start-20)+'&count=20'
+                }
             }
         }
     }

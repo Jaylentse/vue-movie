@@ -20,15 +20,15 @@
         </div>
         <nav class="clearfix" v-show="!$loadingRouteData">
             <ul class="pagination pagination-lg">
-                <li>
-                    <a href="#" aria-label="Previous">
+                <li :class="{'disabled': start == 0}">
+                    <a v-link="path +'?start='+(start-20)+'&count=20'" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li class="page-item" v-for="page in pages" :class="{'active': $index==(start/20)}">
                     <a class="page-link" href="#" v-link="path +'?start='+$index*20+'&count=20'">{{page}}</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
+                <li :class="{'disabled': start + 20 > total}">
+                    <a v-link="path +'?start='+(start+20)+'&count=20'" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
